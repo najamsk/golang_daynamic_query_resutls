@@ -12,6 +12,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
+//NOTE: https://forum.golangbridge.org/t/database-rows-scan-unknown-number-of-columns-json/7378/2
+//above is the reference for code sample.
+
 // TODO: should use gendric sql driver interface
 // and https://pkg.go.dev/github.com/lib/pq
 func main() {

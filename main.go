@@ -25,8 +25,6 @@ func main() {
 	}
 	defer db.Close()
 
-	//func conn
-
 	// Fiber setup and routes starting
 	app := fiber.New()
 
@@ -86,7 +84,6 @@ func queryScanJson(db *sql.DB) ([]byte, error) {
 			return nil, err
 		}
 		if lName.Valid {
-			w.LastName = lName.String
 		}
 		res = append(res, w)
 	}

@@ -66,6 +66,28 @@ type Warrior struct {
 	IsActive  bool   `json:"isActive"`
 }
 
+func queryScanJsonError(db *sql.DB) ([]byte, error) {
+	res := []Warrior{}
+	q := "select first_name,last_name, teacher, is_active from warriors"
+
+	rows, err := db.Query(q)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		w := Warrior{}
+		// err := rows.Scan(&w.FirstName, &w.LastName, &w.Teacher, &w.IsActive)
+		err := rows.Scan(&w.FirstName, &w.LastName, &w.Teacher, &w.IsActive)
+		if err != nil {
+			return nil, err
+		}
+		res = append(res, w)
+	}
+
+	return json.MarshalIndent(res, "", "\t")
+}
+
 func queryScanJson(db *sql.DB) ([]byte, error) {
 	res := []Warrior{}
 	q := "select first_name,last_name, teacher, is_active from warriors"
@@ -84,6 +106,8 @@ func queryScanJson(db *sql.DB) ([]byte, error) {
 			return nil, err
 		}
 		if lName.Valid {
+			w.LastName = lName.String
+			log.Printf("lname.string = %v \n", lName.String)
 		}
 		res = append(res, w)
 	}

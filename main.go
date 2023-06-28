@@ -56,6 +56,20 @@ func main() {
 		return c.SendString(string(res))
 	})
 
+	// this handler should encounter error and throw it in result
+	app.Get("/error", func(c *fiber.Ctx) error {
+		res, err := queryScanJsonError(db)
+		if err != nil {
+			log.Println("fn:queryScanJsonError data error:", err)
+			return c.Status(500).JSON(&fiber.Map{
+				"success": false,
+				"error":   "something went wrong!",
+			})
+		}
+
+		return c.SendString(string(res))
+	})
+
 	log.Fatal(app.Listen(":3000"))
 }
 

@@ -36,3 +36,10 @@ Solution taken from https://forum.golangbridge.org/t/database-rows-scan-unknown-
         (3, 'ninja', 'kakashi', 'hatake', 'orochimaru', 't', now(), now());
 
         select * from warriors;
+
+
+
+
+
+### air package
+https://github.com/cosmtrek/air
